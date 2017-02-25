@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+program="java -Xmx1024m MaxPairwiseProduct"
+tests=('test1' 35 'test2' 6 'test3' 140 'test4' 36 'test5' 9000000000 'test6' 64)
+nbr_of_tests=`expr ${#tests[@]} - 1`
+
+for i in `seq 0 2 $nbr_of_tests`; do
+    r=`$program < ${tests[${i}]}`
+    if [ $r != "${tests[i+1]}" ]; then
+        echo "${tests[i]} failed"
+    else
+        echo "${tests[i]} OK"
+    fi
+done
