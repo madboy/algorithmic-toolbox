@@ -9,8 +9,8 @@ public class MaxPairwiseProduct {
         int n = numbers.length;
         for (int i = 0; i < n; ++i) {
             for (int j = i + 1; j < n; ++j) {
-                if ((long)numbers[i] * (long)numbers[j] > result) {
-                    result = (long)numbers[i] * (long)numbers[j];
+                if ((long) numbers[i] * (long) numbers[j] > result) {
+                    result = (long) numbers[i] * (long) numbers[j];
                 }
             }
         }
@@ -34,7 +34,7 @@ public class MaxPairwiseProduct {
             }
         }
 
-        long result = (long) numbers[firstMax] * (long) numbers[secondMax];
+        long result = (long) numbers[firstMax] * numbers[secondMax];
         return result;
     }
 
