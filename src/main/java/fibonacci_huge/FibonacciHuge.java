@@ -4,7 +4,7 @@ import java.util.*;
 import java.lang.Math;
 
 public class FibonacciHuge {
-  public static int getFibonacciLastDigitFast(int n, int m) {
+  public static int getFibonacciMod(int n, int m) {
     if (n <= 1) {
       return n;
     }
@@ -40,77 +40,42 @@ public class FibonacciHuge {
   }
 
   public static int pisanoPeriod(int m) {
+    int[] table = new int[6 * m + 1];
+
     if (m == 1) {
       return 1;
     } else if (largePisano(m)) {
       return 6 * m;
     } else if (tenMultiple(m)) {
       return 15 * m / 10;
-    }
-    int n = 1;
-    int c = getFibonacciLastDigitFast(n, m);
-    while (true) {
-      int next = getFibonacciLastDigitFast(n + 1, m);
-      if (c == 0 && next == 1) {
-        return n;
-      } else {
-        c = next;
-        n++;
-      }
-    }
-  }
-
-  public static long getFibonacciHuge(long n, long m) {
-    int pisano;
-    int[] table = new int[6* (int) m + 1];
-
-    if (m == 1) {
-      pisano = 1;
-    } else if (largePisano(m)) {
-      pisano = 6 * (int) m;
-    } else if (tenMultiple(m)) {
-      pisano =  15 * (int) m / 10;
     } else {
+      // If it's not one of the special pisano periods
+      // we need to calculate the mod for fibonacci numbers
+      // until the pattern 0 1 repeats and we know we're in the
+      // next pisano period
       table[0] = 0;
       table[1] = 1;
       int i = 2;
-      table[i] = (table[i - 1] + table[i - 2]) % (int) m;
+      table[i] = (table[i - 1] + table[i - 2]) % m;
       int c = table[i];
       i += 1;
       while (true) {
-        table[i] = (table[i - 1] + table[i - 2]) % (int) m;
+        table[i] = (table[i - 1] + table[i - 2]) % m;
         int next = table[i];
         if (c == 0 && next == 1) {
-          pisano = i-1;
-          break;
+          return i - 1;
         } else {
           i++;
           c = next;
         }
       }
     }
+  }
+
+  public static long getFibonacciHuge(long n, long m) {
+    int pisano = pisanoPeriod((int) m);
     int reducedF = (int) (n % pisano);
-    return getFibonacciLastDigitFast(reducedF, (int) m);
-  }
-
-  public static long getFibonacciHuge2(long n, long m) {
-    int p = pisanoPeriod((int) m);
-    return getFibonacciLastDigitFast((int) (n % p), (int) m);
-  }
-
-  public static long getFibonacciHugeNaive(long n, long m) {
-    if (n <= 1) return n;
-
-    long previous = 0;
-    long current = 1;
-
-    for (long i = 0; i < n - 1; ++i) {
-      long tmp_previous = previous;
-      previous = current;
-      current = tmp_previous + current;
-    }
-
-    return current % m;
+    return getFibonacciMod(reducedF, (int) m);
   }
 
   public static void main(String[] args) {
