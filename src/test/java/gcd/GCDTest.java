@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-public class GCTTest {
+public class GCDTest {
   private GCD g;
 
   @Before
