@@ -25,6 +25,10 @@ public class FractionalKnapsack {
       value_over_weight[i] = (double) values[i] / weights[i];
     }
 
+    // Intesting thing, I played around with sorting the list of value_over_weight
+    // but that turned out to be a lot slower than just doing the resort every time
+    // not completely sure why but could be that the memory layout of the values is a lot worse
+    // after the sort. Using an object for the loot and sorting that is even slower.
     int items = 0;
     while (capacity > 0 && items < values.length) {
       double max_value = -1;

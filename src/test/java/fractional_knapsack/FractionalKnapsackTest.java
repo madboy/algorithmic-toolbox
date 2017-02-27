@@ -27,8 +27,8 @@ public class FractionalKnapsackTest {
 
   @Test
   public void moreCapacityThanItems() {
-    int[] values = new int[] {1, 2, 3};
-    int[] weights = new int[] {1, 2, 3};
+    int[] values = new int[] {2, 1, 3};
+    int[] weights = new int[] {2, 1, 3};
     assertEquals(6.0, f.getOptimalValue(11, values, weights), 0.001);
   }
 
@@ -55,8 +55,8 @@ public class FractionalKnapsackTest {
 
   @Test
   public void zeroWeight() {
-    int[] values = new int[] {1, 2, 3};
-    int[] weights = new int[] {0, 1, 2};
+    int[] values = new int[] {3, 2, 1};
+    int[] weights = new int[] {2, 1, 0};
     assertEquals(6.0, f.getOptimalValue(10, values, weights), 0.001);
 
   }
@@ -70,7 +70,7 @@ public class FractionalKnapsackTest {
     fillLoot(weights, 0, 2000000);
 
     for (int i = 0; i < 1000; i++) {
-      f.getOptimalValue(12, values, weights);
+      f.getOptimalValue(2000000, values, weights);
     }
   }
 }
