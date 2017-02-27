@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+javac -encoding UTF-8 DotProduct.java

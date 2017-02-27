@@ -58,7 +58,6 @@ public class FractionalKnapsackTest {
     int[] values = new int[] {3, 2, 1};
     int[] weights = new int[] {2, 1, 0};
     assertEquals(6.0, f.getOptimalValue(10, values, weights), 0.001);
-
   }
 
   @Test
@@ -69,8 +68,6 @@ public class FractionalKnapsackTest {
     fillLoot(values, 1, 2000000);
     fillLoot(weights, 0, 2000000);
 
-    for (int i = 0; i < 1000; i++) {
-      f.getOptimalValue(2000000, values, weights);
-    }
+    f.getOptimalValue(2000000, values, weights);
   }
 }

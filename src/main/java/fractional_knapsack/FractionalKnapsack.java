@@ -1,8 +1,7 @@
 package fractional_knapsack;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class FractionalKnapsack {
   public static double getOptimalValue(int capacity, int[] values, int[] weights) {
@@ -19,37 +18,55 @@ public class FractionalKnapsack {
     // remove the item we've picked up
     // go to next valuable
 
-    // calculate value per weight
-    double[] value_over_weight = new double[values.length];
-    for (int i = 0; i < values.length; i++) {
-      value_over_weight[i] = (double) values[i] / weights[i];
+    final class Loot implements Comparable<Loot>{
+      private int v;
+      private int w;
+      private double vow;
+
+      public Loot(int v, int w) {
+        this.v = v;
+        this.w = w;
+        vow = (double) v / w;
+      }
+
+      public int compareTo(Loot l) {
+        if (this.vow < l.vow) {
+          return 1;
+        } else if (this.vow == l.vow) {
+          return 0;
+        }
+        return -1;
+      }
+
     }
 
-    // Intesting thing, I played around with sorting the list of value_over_weight
+    // calculate value per weight
+    Loot[] lootTable = new Loot[values.length];
+    for (int i = 0; i < values.length; i++) {
+      lootTable[i] = new Loot(values[i], weights[i]);
+    }
+
+    Arrays.sort(lootTable);
+
+    // Interesting thing, I played around with sorting the list of value_over_weight
     // but that turned out to be a lot slower than just doing the resort every time
     // not completely sure why but could be that the memory layout of the values is a lot worse
     // after the sort. Using an object for the loot and sorting that is even slower.
+    // Could also be an artifact of how I was running the test. I was doing the same test
+    // 1000 times which may skew results. Still switching to sorting since it makes for more readable
+    // code and not noticeably slower on single runs.
     int items = 0;
     while (capacity > 0 && items < values.length) {
-      double max_value = -1;
-      int max_value_pos = -1;
-      for (int i = 0; i < value_over_weight.length; i++) {
-        if (value_over_weight[i] > max_value) {
-          max_value = value_over_weight[i];
-          max_value_pos = i;
-        }
-      }
 
-      if (capacity - weights[max_value_pos] < 0) {
+      if (capacity - lootTable[items].w < 0) {
         // pick a fraction
-        value += (capacity / (double) weights[max_value_pos]) * values[max_value_pos];
-        capacity = capacity - weights[max_value_pos];
+        value += (capacity / (double) lootTable[items].w) * lootTable[items].v;
+        capacity = capacity - lootTable[items].w;
         items++;
       } else {
-        // take all of it
-        value += values[max_value_pos];
-        capacity = capacity - weights[max_value_pos];
-        value_over_weight[max_value_pos] = -1;
+        // take the whole item
+        value += lootTable[items].v;
+        capacity = capacity - lootTable[items].w;
         items++;
       }
     }
