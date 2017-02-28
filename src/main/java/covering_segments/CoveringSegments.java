@@ -29,7 +29,7 @@ public class CoveringSegments {
 
   public static int[] optimalPoints(Segment[] segments) {
     // Boundaries:
-    // 1 ≤ n ≤ 100; 0 ≤ ai ≤ bi ≤ 1000000000
+    // 1 <= n <= 100; 0 <= ai <= bi <= 1000000000
     // sort the segments based on the start point
     // pick the leftmost one
     // add new segments as long as their start is within the end

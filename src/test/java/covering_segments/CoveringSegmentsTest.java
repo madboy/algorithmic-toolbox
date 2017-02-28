@@ -2,7 +2,6 @@ package covering_segments;
 
 import static org.junit.Assert.assertTrue;
 
-//import java.util.Random;
 import covering_segments.CoveringSegments.Segment;
 import java.util.Arrays;
 import java.util.Random;
