@@ -6,40 +6,24 @@ public class DifferentSummands {
 
   public static List<Integer> optimalSummands(int n) {
     // Boudaries 1 <= n 1000000000
-    // Divide the number by 2
     List<Integer> summands = new ArrayList<>();
+    // Eat the number in 1 bit bigger each time sizes
     int remains = n;
+    int l = 1;
     while (remains != 0) {
-      if (remains <= 2) { // for two and below we cannot make it any smaller
+      if (2 * l < remains) {
+        summands.add(l);
+        remains -= l;
+        l++;
+        // we cannot divide the last part in new sizes so just gobble up all
+      } else {
         summands.add(remains);
         break;
       }
-//      int half = remains /2;
-      int half = remains - remains/2;
-//      if (half % 2 != 0){ // if it's odd we can add it directly
-        summands.add(half);
-//      } else { // else we should be more greedy
-//        half += 1;
-//        summands.add(half);
-//      }
-      remains -= half;
-//      if ((remains % 2) != 0) {
-//        int half = remains/2 + 1;
-//        summands.add(half);
-//        remains -= half;
-//      } else {
-//        int half = remains /2;
-//        if ((remains - half) == half && (remains % 2) != 0) { //equal parts left which we cannot have
-//          half += 1;
-//        }
-//        summands.add(half);
-//        remains -= half;
-//      }
     }
 
     Collections.sort(summands);
 
-    //write your code here
     return summands;
   }
 
@@ -53,4 +37,3 @@ public class DifferentSummands {
     }
   }
 }
-

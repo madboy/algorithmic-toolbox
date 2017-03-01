@@ -1,15 +1,22 @@
 package different_summands;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
 public class DifferentSummandsTest {
 
   private DifferentSummands df;
+
+  private static int randInt(int min, int max) {
+    Random r = new Random();
+    return r.nextInt((max - min) + 1) + min;
+  }
 
   @Before
   public void init() {
@@ -22,8 +29,8 @@ public class DifferentSummandsTest {
     summands.add(1);
 
     List<Integer> actual = df.optimalSummands(1);
-    assertTrue(String.format("%s != %s", summands.toString(), actual.toString()),
-               summands.equals(actual));
+    assertTrue(
+        String.format("%s != %s", summands.toString(), actual.toString()), summands.equals(actual));
   }
 
   @Test
@@ -32,8 +39,8 @@ public class DifferentSummandsTest {
     summands.add(2);
 
     List<Integer> actual = df.optimalSummands(2);
-    assertTrue(String.format("%s != %s", summands.toString(), actual.toString()),
-               summands.equals(actual));
+    assertTrue(
+        String.format("%s != %s", summands.toString(), actual.toString()), summands.equals(actual));
   }
 
   @Test
@@ -43,8 +50,8 @@ public class DifferentSummandsTest {
     summands.add(3);
 
     List<Integer> actual = df.optimalSummands(4);
-    assertTrue(String.format("%s != %s", summands.toString(), actual.toString()),
-               summands.equals(actual));
+    assertTrue(
+        String.format("%s != %s", summands.toString(), actual.toString()), summands.equals(actual));
   }
 
   @Test
@@ -55,8 +62,8 @@ public class DifferentSummandsTest {
     summands.add(3);
 
     List<Integer> actual = df.optimalSummands(6);
-    assertTrue(String.format("%s != %s", summands.toString(), actual.toString()),
-               summands.equals(actual));
+    assertTrue(
+        String.format("%s != %s", summands.toString(), actual.toString()), summands.equals(actual));
   }
 
   @Test
@@ -67,8 +74,8 @@ public class DifferentSummandsTest {
     summands.add(4);
 
     List<Integer> actual = df.optimalSummands(7);
-    assertTrue(String.format("%s != %s", summands.toString(), actual.toString()),
-               summands.equals(actual));
+    assertTrue(
+        String.format("%s != %s", summands.toString(), actual.toString()), summands.equals(actual));
   }
 
   @Test
@@ -79,33 +86,34 @@ public class DifferentSummandsTest {
     summands.add(5);
 
     List<Integer> actual = df.optimalSummands(8);
-    assertTrue(String.format("%s != %s", summands.toString(), actual.toString()),
-               summands.equals(actual));
+    assertTrue(
+        String.format("%s != %s", summands.toString(), actual.toString()), summands.equals(actual));
   }
 
   @Test
   public void threePartsNine() {
     List<Integer> summands = new ArrayList<>();
     summands.add(1);
-    summands.add(3);
-    summands.add(5);
+    summands.add(2);
+    summands.add(6);
 
     List<Integer> actual = df.optimalSummands(9);
-    assertTrue(String.format("%s != %s", summands.toString(), actual.toString()),
-               summands.equals(actual));
+    assertTrue(
+        String.format("%s != %s", summands.toString(), actual.toString()), summands.equals(actual));
   }
 
   @Test
   public void fourPartsTwenty() {
     List<Integer> summands = new ArrayList<>();
     summands.add(1);
+    summands.add(2);
     summands.add(3);
-    summands.add(5);
-    summands.add(11);
+    summands.add(4);
+    summands.add(10);
 
     List<Integer> actual = df.optimalSummands(20);
-    assertTrue(String.format("%s != %s", summands.toString(), actual.toString()),
-               summands.equals(actual));
+    assertTrue(
+        String.format("%s != %s", summands.toString(), actual.toString()), summands.equals(actual));
   }
 
   @Test
@@ -113,32 +121,34 @@ public class DifferentSummandsTest {
     List<Integer> summands = new ArrayList<>();
     summands.add(1);
     summands.add(2);
+    summands.add(3);
     summands.add(4);
-    summands.add(7);
-    summands.add(15);
+    summands.add(5);
+    summands.add(6);
+    summands.add(8);
 
     List<Integer> actual = df.optimalSummands(29);
-    assertTrue(String.format("%s != %s", summands.toString(), actual.toString()),
-               summands.equals(actual));
+    assertTrue(
+        String.format("%s != %s", summands.toString(), actual.toString()), summands.equals(actual));
   }
 
   @Test
   public void maximumValue() {
-    int[]
-        result =
-        new int[]{1, 3, 7, 15, 31, 59, 119, 239, 477, 953, 1907, 3815, 7629, 15259, 30517, 61035,
-                  122071, 244141, 488281, 976563, 1953125, 3906249, 7812501, 15624999, 31250001,
-                  62499999, 125000001, 249999999, 500000001};
-
-    List<Integer> summands = new ArrayList<>();
-
-    for (int r : result) {
-      summands.add(r);
-    }
-
-    // Currently we're having a duplicate number in this series
     List<Integer> actual = df.optimalSummands(1000000000);
-    assertTrue(String.format("%s != %s", summands.toString(), actual.toString()),
-               summands.equals(actual));
+    assertEquals(44720, actual.size());
+  }
+
+  @Test
+  public void randomNumbers() {
+    for (int i = 0; i < 10; i++) {
+      int n = randInt(1, 1000000000);
+      List<Integer> actual = df.optimalSummands(n);
+
+      int sum = 0;
+      for (int s : actual) {
+        sum += s;
+      }
+      assertEquals(sum, n);
+    }
   }
 }
