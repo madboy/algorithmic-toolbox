@@ -1,16 +1,23 @@
+package binary_search;
+
 import java.io.*;
 import java.util.*;
 
 public class BinarySearch {
 
-    static int binarySearch(int[] a, int x) {
+    // Contraints:
+    // 1≤𝑛,𝑘≤10^5;
+    // 1≤𝑎𝑖 ≤10^9 for all 0≤𝑖<𝑛;
+    // 1≤𝑏𝑗 ≤10^9 for all 0≤𝑗<𝑘;
+
+    public static int binarySearch(int[] a, int x) {
         int left = 0, right = a.length;
         //write your code here
 
         return -1;
     }
 
-    static int linearSearch(int[] a, int x) {
+    public static int linearSearch(int[] a, int x) {
         for (int i = 0; i < a.length; i++) {
             if (a[i] == x) return i;
         }
@@ -31,7 +38,7 @@ public class BinarySearch {
         }
         for (int i = 0; i < m; i++) {
             //replace with the call to binarySearch when implemented
-            System.out.print(linearSearch(a, b[i]) + " ");
+            System.out.print(binarySearch(a, b[i]) + " ");
         }
     }
     static class FastScanner {
