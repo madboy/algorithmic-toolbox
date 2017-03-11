@@ -1,22 +1,18 @@
 package different_summands;
 
+import test_utils.TestUtils;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
 public class DifferentSummandsTest {
 
   private DifferentSummands df;
-
-  private static int randInt(int min, int max) {
-    Random r = new Random();
-    return r.nextInt((max - min) + 1) + min;
-  }
 
   @Before
   public void init() {
@@ -141,7 +137,7 @@ public class DifferentSummandsTest {
   @Test
   public void randomNumbers() {
     for (int i = 0; i < 10; i++) {
-      int n = randInt(1, 1000000000);
+      int n = TestUtils.randInt(1, 1000000000);
       List<Integer> actual = df.optimalSummands(n);
 
       int sum = 0;

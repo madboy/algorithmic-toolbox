@@ -3,8 +3,8 @@ package covering_segments;
 import static org.junit.Assert.assertTrue;
 
 import covering_segments.CoveringSegments.Segment;
+import test_utils.TestUtils;
 import java.util.Arrays;
-import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,15 +12,10 @@ public class CoveringSegmentsTest {
 
   private CoveringSegments cs;
 
-  private static int randInt(int min, int max) {
-    Random r = new Random();
-    return r.nextInt((max - min) + 1) + min;
-  }
-
   private void fillSegments(Segment[] segments, int min, int max) {
     for (int i = 0; i < segments.length; i++) {
-      int start = randInt(min, max);
-      int end = randInt(min, max);
+      int start = TestUtils.randInt(min, max);
+      int end = TestUtils.randInt(min, max);
       segments[i] = new Segment(start, end);
     }
   }

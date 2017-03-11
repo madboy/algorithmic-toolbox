@@ -1,8 +1,10 @@
+package majority_element;
+
 import java.util.*;
 import java.io.*;
 
 public class MajorityElement {
-    private static int getMajorityElement(int[] a, int left, int right) {
+    public static int getMajorityElement(int[] a, int left, int right) {
         if (left == right) {
             return -1;
         }
