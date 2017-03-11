@@ -18,6 +18,7 @@ public class BinarySearch {
     // if it's smaller we should continue looking in the lower part of the array
     // if it's bigger we'll look in the upper part
 
+
     int left = 0, right = a.length;
     int i = 0;
 
@@ -26,7 +27,7 @@ public class BinarySearch {
       if (a[mid] == x) {
         return mid;
       } else if (x < a[mid]) {
-        right = mid - 1;
+        right = mid;
       } else if (a[mid] < x) {
         left = mid + 1;
       }

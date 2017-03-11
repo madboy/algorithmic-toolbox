@@ -1,7 +1,6 @@
 package binary_search;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -66,6 +65,24 @@ public class BinarySearchTest {
     }
     Arrays.sort(l);
     bs.binarySearch(l, 912090);
+  }
+
+  @Test
+  public void lookingForThree() {
+    int[] l = new int[] {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    assertEquals(1, bs.binarySearch(l, 3));
+  }
+
+  @Test
+  public void failingUploadTest() {
+    int[] l = new int[] {2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    int[] s = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    int[] expected = new int[] {-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, -1};
+
+    for (int i = 0; i < s.length; i++) {
+      int actual = bs.binarySearch(l, s[i]);
+      assertEquals(String.format("%d %d -> %d", expected[i], actual, s[i]), expected[i], actual);
+    }
   }
 
 }
