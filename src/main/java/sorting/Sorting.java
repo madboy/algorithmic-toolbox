@@ -1,3 +1,5 @@
+package sorting;
+
 import java.io.*;
 import java.util.*;
 
@@ -31,7 +33,7 @@ public class Sorting {
         return j;
     }
 
-    private static void randomizedQuickSort(int[] a, int l, int r) {
+    public static void randomizedQuickSort(int[] a, int l, int r) {
         if (l >= r) {
             return;
         }

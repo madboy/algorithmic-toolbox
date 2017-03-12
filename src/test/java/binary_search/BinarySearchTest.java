@@ -54,10 +54,7 @@ public class BinarySearchTest {
 
   @Test
   public void longList() {
-    int[] l = new int[100000];
-    for (int i = 0; i < l.length; i++){
-      l[i] = TestUtils.randInt(1, 1000000000);
-    }
+    int[] l = TestUtils.randomList(100000, 1, 1000000000);
     Arrays.sort(l);
     bs.binarySearch(l, 912090);
   }

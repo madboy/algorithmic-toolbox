@@ -11,4 +11,12 @@ public class TestUtils {
     Random r = new Random();
     return r.nextInt((max - min) + 1) + min;
   }
+
+  public static int[] randomList(int length, int minn, int max) {
+    int[] l = new int[length];
+    for (int i = 0; i < l.length; i++){
+      l[i] = TestUtils.randInt(1, max);
+    }
+    return l;
+  }
 }
