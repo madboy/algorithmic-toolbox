@@ -59,7 +59,7 @@ public class PrimitiveCalculator {
         dp[i] = dp[i / 2] + 1;
       }
 
-      if (dp[i] == 0 || dp[i - 1] < dp[i]) {
+      if (dp[i - 1] < dp[i]) {
         dp[i] = dp[i - 1] + 1;
       }
     }
