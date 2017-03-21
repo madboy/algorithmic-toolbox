@@ -128,4 +128,10 @@ public class KnapsackTest {
     int r = ks.optimalWeight(10, new int[] {3, 5, 3, 3, 5});
     assertEquals(10, r);
   }
+
+  @Test
+  public void roomLeft() {
+    int r = ks.optimalWeight(3, new int[] {1, 2});
+    assertEquals(3, r);
+  }
 }
