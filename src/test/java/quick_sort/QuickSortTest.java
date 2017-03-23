@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.junit.Before;
 import org.junit.Test;
+import test_utils.TestUtils;
 
 public class QuickSortTest {
   private QuickSort qs;
@@ -39,6 +40,50 @@ public class QuickSortTest {
   @Test
   public void moreSort() {
     int[] l = new int[] {2, 1, 1, 3, 2};
+    int[] e = Arrays.copyOf(l, l.length);
+    Arrays.sort(e);
+    qs.sort(l, 0, l.length);
+    assertTrue(
+        String.format("%s != %s", Arrays.toString(e), Arrays.toString(l)),
+        Arrays.equals(e, l));
+  }
+
+  @Test
+  public void fiveElements() {
+    int[] l = new int[] {2,3,9,2,2};
+    int[] e = Arrays.copyOf(l, l.length);
+    Arrays.sort(e);
+    qs.sort(l, 0, l.length);
+    assertTrue(
+        String.format("%s != %s", Arrays.toString(e), Arrays.toString(l)),
+        Arrays.equals(e, l));
+  }
+
+  @Test
+  public void shortLowDiversity() {
+    int[] l = TestUtils.randomList(10000, 1, 5);
+    int[] e = Arrays.copyOf(l, l.length);
+    Arrays.sort(e);
+    qs.sort(l, 0, l.length);
+    assertTrue(
+        String.format("%s != %s", Arrays.toString(e), Arrays.toString(l)),
+        Arrays.equals(e, l));
+  }
+
+  @Test
+  public void longLowDiversity() {
+    int[] l = TestUtils.randomList(100000, 1, 5);
+    int[] e = Arrays.copyOf(l, l.length);
+    Arrays.sort(e);
+    qs.sort(l, 0, l.length);
+    assertTrue(
+        String.format("%s != %s", Arrays.toString(e), Arrays.toString(l)),
+        Arrays.equals(e, l));
+  }
+
+  @Test
+  public void longDiverse() {
+    int[] l = TestUtils.randomList(100000, 1, 1000000000);
     int[] e = Arrays.copyOf(l, l.length);
     Arrays.sort(e);
     qs.sort(l, 0, l.length);
