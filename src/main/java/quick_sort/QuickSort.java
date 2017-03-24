@@ -9,21 +9,25 @@ public class QuickSort {
 
   private void quickSort(int[] A, int p, int r) {
     if (p < r) {
-      int q = randomizedPartition(A, p, r);
-      quickSort(A, p, q - 1);
-      quickSort(A, q + 1, r);
+      //      int q = randomizedPartition(A, p, r);
+      //      quickSort(A, p, q - 1);
+      //      quickSort(A, q + 1, r);
+
+      int[] qs = threeWayPartition(A, p, r);
+      quickSort(A, p, qs[0]);
+      quickSort(A, qs[1], r);
     }
   }
 
   private void quickSortTR(int[] A, int p, int r) {
     while (p < r) {
       int q = partition(A, p, r);
-      quickSortTR(A, p, q-1);
-      p = q +1;
+      quickSortTR(A, p, q - 1);
+      p = q + 1;
     }
   }
 
-  private int threeWayPartition(int[] A, int p, int r) {
+  private int[] threeWayPartition(int[] A, int p, int r) {
     swap(A, randomInt(p, r), r);
     int i = 0;
     int k = 0;
@@ -37,9 +41,14 @@ public class QuickSort {
         i++;
       }
     }
-    int m = Math.min(q-k, r-q+1);
-//    swapRange(A,k,k+m-1,r-m+1,r);
-    return k;//,r-q+k;
+    int m = Math.min(q - k, r - q + 1);
+    int sq = r - m + 1;
+    for (int sk = k; sk < k + m; sk++) {
+      swap(A, sk, sq);
+      sq++;
+    }
+    //    swapRange(A,k,k+m-1,r-m+1,r);
+    return new int[] {k - 1, r - q + k + 1};
   }
 
   private int randomizedPartition(int[] A, int p, int r) {
